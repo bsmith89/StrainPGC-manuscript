@@ -132,11 +132,11 @@ gut microbiome.
 
 The most common way to study intraspecific variation *in situ* is to
 quantify the gene families present in shotgun metagenomes—an approach
-referred to as “pangenome profiling”. Pangenome profiling estimates the
+referred to as "pangenome profiling". Pangenome profiling estimates the
 mean sequencing depth—sometimes called vertical coverage—of a gene
 family as the mean number of reads aligning to each base of a
 representative sequence [@milaneseMicrobialAbundanceActivity2019b] (Fig. 1A). (For brevity, we
-use “gene” as short-hand for gene family and “depth” for mean sequencing
+use "gene" as short-hand for gene family and "depth" for mean sequencing
 depth throughout this paper.) Several existing tools, including PanPhlAn
 [@beghiniIntegratingTaxonomicFunctional2021] and MIDAS [@Zhao2022;@nayfachIntegratedMetagenomicsPipeline2016a] perform pangenome
 profiling. However, due to several sources of error in quantifying gene
@@ -209,10 +209,10 @@ pangenome profiling and gene content estimation are highlighted
 (brackets, see Introduction). **(B)** Limitations of gene content
 estimation using single samples. Depth is shown across five samples
 (scenarios described along the x-axis) for three genes: one gene is
-ubiquitous across strains (“core”, square), another found in only the
-strain of interest (“strain-specific”, triangle), and a third not
-present in the strain of interest but subject to cross-mapping (“not
-present”, x-shape). Colors distinguish between strain-pure samples
+ubiquitous across strains ("core", square), another found in only the
+strain of interest ("strain-specific", triangle), and a third not
+present in the strain of interest but subject to cross-mapping ("not
+present", x-shape). Colors distinguish between strain-pure samples
 (green markers) and samples with a different strain or a mixture of more
 than one strain (gray markers). Traditional, single-sample analysis
 estimates gene content by selecting genes with a minimum depth (red,
@@ -230,7 +230,7 @@ without considering strain variation (dashed line). **(D)** Schematic
 depiction of how StrainPGC estimates gene content based on both
 correlation and depth ratio. The red lines indicate the thresholds of
 depth ratio and correlation used by StrainPGC to select genes. With all
-samples combined (dashed markers), the “not-present” gene is correctly
+samples combined (dashed markers), the "not-present" gene is correctly
 excluded due to low correlation, and the core gene is correctly
 included, but the strain-specific gene is lost due to its low depth
 ratio and correlation. Analyzing the strain-pure set separately moves
@@ -272,9 +272,9 @@ multiple samples to overcome the limitations of pangenome profiling and
 intraspecific variation (Fig. 1A-C). For each species, StrainPGC
 requires three inputs: (1) pangenome profiles, (2) a list of marker
 genes, which are used to estimate the species depth, and (3) the list of
-“strain-pure” samples for each strain, which was determined by
+"strain-pure" samples for each strain, which was determined by
 StrainFacts. StrainPGC estimates the overall species depth across
-samples using the provided marker genes; “species-free” samples, those
+samples using the provided marker genes; "species-free" samples, those
 where the species is below the detection limit, are identified in this
 way. Then, working separately for each strain of a species, StrainPGC
 calculates two statistics for each gene (Fig. 1C): (1) the depth ratio
@@ -484,8 +484,8 @@ strains in 443 species across 12 phyla (Fig. 3E). While these were
 primarily Bacteria, we were also able to estimate gene content for
 strains in three species of Archaea. The largest number of inferred
 strains were classified in the phylum Firmicutes\_A (2232 strains; an
-additional 80 and 141 strains were also in “Firmicutes”, and
-“Firmicutes\_B”, respectively, which are classified as separate phyla in
+additional 80 and 141 strains were also in "Firmicutes", and
+"Firmicutes\_B", respectively, which are classified as separate phyla in
 the GTDB taxonomy), followed by Bacteroidota (727), and Proteobacteria
 (189). Hence, StrainPGC resolved gene content for myriad strains across
 a diverse set of species found in the human gut.
@@ -555,7 +555,7 @@ prevalence observed in high-quality reference genomes (r = 0.84, p <
 existing reference database.
 
 Based on these de novo prevalence estimates, we assigned genes to the
-“core” (≥ 90% prevalence), “shell” (< 90% and ≥ 15%), or “cloud”
+"core" (≥ 90% prevalence), "shell" (< 90% and ≥ 15%), or "cloud"
 (< 15%) pangenome fractions. We then calculated the portion of
 estimated gene content that fell into each prevalence class for each
 inferred strain (Fig. 4B). Computing the median first within and then
@@ -610,12 +610,12 @@ panel represent individual samples, colors represent *E. coli* strains
 inferred from StrainFacts, and the height of colored bars indicates
 strain abundance normalized to total *E. coli* abundance in the sample.
 For donors, samples are ordered arbitrarily. Recipient samples are
-ordered by collection day and include samples at baseline (labeled “B”)
+ordered by collection day and include samples at baseline (labeled "B")
 collected before initial FMT treatment, samples collected before each of
-up to six maintenance FMT doses (labeled “M1” to “M6”), and up to three
-follow-up samples (labeled “F1” to “F3”). For a subset of recipients,
+up to six maintenance FMT doses (labeled "M1" to "M6"), and up to three
+follow-up samples (labeled "F1" to "F3"). For a subset of recipients,
 samples were also collected after antibiotic treatment and before FMT
-(labeled “pA”, post-antibiotics). For each donor, one strain (tan in
+(labeled "pA", post-antibiotics). For each donor, one strain (tan in
 D44, aqua in D97) showed a high rate of engraftment in recipients at
 follow-up. **(B)** Comparison of shell gene content between inferred
 strains from the FMT experiment (18 strains) and *E. coli* strains from
@@ -849,7 +849,7 @@ of interest.
 For pangenome profiling, the MIDASDB representative gene sequences from
 selected species are compiled into an index for alignment and
 quantification. At this stage, we apply additional filtering to the set
-of representative sequences, which we refer to as “pruning”, with the
+of representative sequences, which we refer to as "pruning", with the
 goal of speeding up alignment and improving quantification by reducing
 the rate of cross-mapping within and between species. First, we remove
 representative sequences that are less than 50% of the median length in
@@ -961,7 +961,7 @@ number of unmasked positions.
 
 Note that this measure of genetic distance is related to but not
 equivalent to the complement of the core genome average nucleotide
-identity (“ANI dissimilarity”: $1 - \mathrm{ANI}$), since it is based on
+identity ("ANI dissimilarity": $1 - \mathrm{ANI}$), since it is based on
 only known polymorphic sites in the core genome, and the actual ANI
 dissimilarity—which includes many non-polymorphic sites in the
 denominator, as well—is likely to be much smaller.
@@ -1060,7 +1060,7 @@ the UHGG <https://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_genomes/human-
 For the analysis of strain distribution in the HMP2, strain depth was
 estimated as the product of the estimated species depth and estimated
 strain fraction. All strains with depth > 0.1x were considered to be
-“present” in a sample. The number of strains in each subject was
+"present" in a sample. The number of strains in each subject was
 calculated as the total number of strains present in any of that
 subject’s samples. For shared-strain analysis (Fig. 3C), samples with
 fewer than 10 strains present of any species were excluded from
