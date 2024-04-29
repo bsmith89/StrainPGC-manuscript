@@ -1,0 +1,12 @@
+name: pandoc
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - imagemagick
+  - pandoc
+  - pandoc-crossref
+  - pip
+  - pip:
+    - biblib-simple
