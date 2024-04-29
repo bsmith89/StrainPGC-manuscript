@@ -812,7 +812,7 @@ threshold using VSEARCH v2.23.0 [@rognesVSEARCHVersatileOpen2016], with the long
 sequence initially assigned as the representative sequence for the
 cluster. Next, in order to identify and remove additional cases of
 fragmented genes, we applied CD-HIT v4.8.1 [@fuCDHITAcceleratedClustering2012] (using options
-\`-c 1 -aS 0.9 -G 0 -g 1 -AS 180\`); when a shorter representative
+`-c 1 -aS 0.9 -G 0 -g 1 -AS 180`); when a shorter representative
 sequence had perfect identity over ≥ 90% of length to a longer sequence,
 the two clusters were merged, and the longer sequence was assigned as
 representative. Short gene sequences predicted on the opposite strand, a
@@ -887,11 +887,11 @@ collected *in vitro*.
 
 For the work presented here, we ran MIDAS v3 as follows. Using Bowtie2
 v2.5.1 throughout, a single reference index was built for 627 species
-using \`midas2 build\_bowtie2db --prune\_centroids
---remove\_singleton\`. Paired-end reads for each sample were aligned to
-this index using \` midas2 run\_genes --aln\_speed sensitive
---aln\_extra\_flags '--mm --ignore-quals' --total\_depth 0\`. Mean
-mapping depth was calculated using \`samtools depth\` and summed up at
+using `midas2 build_bowtie2db --prune_centroids
+--remove_singleton`. Paired-end reads for each sample were aligned to
+this index using ` midas2 run_genes --aln_speed sensitive
+--aln_extra_flags '--mm --ignore-quals' --total_depth 0`. Mean
+mapping depth was calculated using `samtools depth` and summed up at
 the 75% ANI OGF level.
 
 ### Reference genomes and species marker genes
@@ -929,15 +929,15 @@ only one strain. Strain genotypes and proportions were estimated with
 StrainFacts v0.6.0, using the updated Model 4 and a number of strains
 set as $n^{0.85}$ where $n$ is the number of samples. For the vast
 majority of species, this model was fit using a single, standardized set
-of hyperparameters: \`--optimizer-learning-rate 0.05
---min-optimizer-learning-rate 1e-2 --hyperparameters gamma\_hyper=1e-15
-pi\_hyper=0.01 pi\_hyper2=0.01 rho\_hyper=1.0 rho\_hyper2=1.0
---anneal-hyperparameters gamma\_hyper=0.999 --anneal-steps 120000\`.
+of hyperparameters: `--optimizer-learning-rate 0.05
+--min-optimizer-learning-rate 1e-2 --hyperparameters gamma_hyper=1e-15
+pi_hyper=0.01 pi_hyper2=0.01 rho_hyper=1.0 rho_hyper2=1.0
+--anneal-hyperparameters gamma_hyper=0.999 --anneal-steps 120000`.
 However, for seven species (species IDs: sp-100076, sp-101302,
 sp-101306, sp-101704, sp-102478, sp-103456, sp-103683), amended
-hyperparameters were found to perform better: \`gamma\_hyper=1e-10
-pi\_hyper=1e-3 pi\_hyper2=1e-3 gamma\_hyper=0.1 rho\_hyper=10.0
-rho\_hyper2=10.0 --anneal-steps 20000\`.
+hyperparameters were found to perform better: `gamma_hyper=1e-10
+pi_hyper=1e-3 pi_hyper2=1e-3 gamma_hyper=0.1 rho_hyper=10.0
+rho_hyper2=10.0 --anneal-steps 20000`.
 
 Each strain-pure set was defined as those samples where StrainFacts
 estimated it to be > 95% of the species. For analyses requiring
@@ -1008,7 +1008,7 @@ GT-Pro SNPs from primarily a single species, or where the species's
 marker genes were never detected in metagenomes.
 
 We identified gene sequences in these genomes with Prodigal v2.6.3
-[@hyattGeneTranslationInitiation2012] (masking ambiguous bases and using the \`meta\`
+[@hyattGeneTranslationInitiation2012] (masking ambiguous bases and using the `meta`
 procedure), translated them with codon table 11, and annotated them with
 EggNOG mapper version 2.1.10. The ground-truth annotations used to
 assess performance were defined as the complete set of all EggNOG OGs
@@ -1167,12 +1167,12 @@ estimates.
 
 -   Supplementary Table 1: Details about all inferred strains in HMP2
 
-    -   \`hmp2\_inferred\_strains\_supplementary\_table1.tsv\`
+    -   `hmp2_inferred_strains_supplementary_table1.tsv`
 
 -   Supplementary Table 2: Details about gene content of E. coli
     > strain-6 vs. strain-9 in UCFMT
 
-    -   \`ucfmt\_focal\_strain\_genes\_supplementary\_table2.tsv\`
+    -   `ucfmt_focal_strain_genes_supplementary_table2.tsv`
 
 ## References
 
