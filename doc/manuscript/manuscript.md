@@ -286,13 +286,13 @@ correlation and depth ratio are estimated to be present in that strain’s
 genome (Fig. 1D).
 
 StrainPGC is open source and freely available at
-&lt;[<u>https://github.com/bsmith89/StrainPGC</u>](https://github.com/bsmith89/StrainPGC)&gt;.
+<https://github.com/bsmith89/StrainPGC>.
 While the work presented here uses MIDAS v3 and the comprehensive UHGG
 genome collection [@Almeida2021], the core StrainPGC software is
 designed to also work with pangenome profiling and strain tracking from
 alternative tools. Our integrated analysis workflow is implemented with
 Snakemake [@molderSustainableDataAnalysis2021a] and is available at
-&lt;[<u>https://github.com/bsmith89/StrainPGC-manuscript</u>](https://github.com/bsmith89/StrainPGC-manuscript)&gt;.
+<https://github.com/bsmith89/StrainPGC-manuscript>.
 
 ## StrainPGC accurately estimates gene content of strains in a complex synthetic community
 
@@ -360,11 +360,11 @@ benchmark genome, we instead selected the inferred strain with the
 highest F1 score, giving these two methods an advantage. Nonetheless,
 StrainPGC performed better on average than either alternative: a median
 increase of 0.069 in F1 score compared to PanPhlAn (IQR: 0.038–0.093; p
-&lt; 1e-10 by Wilcoxon, non-parametric, paired, t-test) and 0.042
-relative to StrainPanDA (IQR: 0.022–0.079; p&lt;1e-10). All three tools
+< 1e-10 by Wilcoxon, non-parametric, paired, t-test) and 0.042
+relative to StrainPanDA (IQR: 0.022–0.079; p < 1e-10). All three tools
 had high precision, and the superior performance of StrainPGC was driven
 primarily by the recall: 0.12 greater than PanPhlAn and 0.08 greater
-than StranPanDA (p &lt; 1e-10 for both). For all three tools, species
+than StranPanDA (p < 1e-10 for both). For all three tools, species
 with higher estimated depth had better performance on this benchmark
 (Spearman’s correlation between maximum species depth across samples and
 F1 score: Spearman’s ⍴ = 0.30, 0.55, and 0.33 for StrainPGC, PanPhlAn,
@@ -387,20 +387,20 @@ high-prevalence, species marker genes assigned to a given inferred
 strain reflects the overall completeness of the estimated gene content
 for that strain. Indeed, across benchmark genomes, we found a strong
 correlation between the fraction of species marker genes and the F1
-score (⍴ = 0.60, p &lt; 1e-10). As expected, this appears to be driven
-primarily by a strong association with the recall (⍴ = 0.63, p &lt;
+score (⍴ = 0.60, p < 1e-10). As expected, this appears to be driven
+primarily by a strong association with the recall (⍴ = 0.63, p <
 1e-10); a weaker correlation was found with the precision (⍴ = 0.34, p
-&lt; 1e-3). Second, for strains suffering from low signal-to-noise, such
+< 1e-3). Second, for strains suffering from low signal-to-noise, such
 as those at low sequencing depths, the depth ratio of assigned genes
 will be more variable. We, therefore, calculated a noise index
 reflecting: the standard deviation across all assigned genes of the
 log10-transformed depth ratio. For this score, we found a negative
-correlation with the F1 score (⍴ = -0.68, p &lt; 1e-10), this time
-driven by an association with the precision (⍴ = -0.58, p &lt; 1e-9) as
-well as recall (⍴ = -0.53, p &lt; 1e-8). In our benchmark, the 22
-strains with &lt; 95% species marker genes or a noise index &gt; 0.25
+correlation with the F1 score (⍴ = -0.68, p < 1e-10), this time
+driven by an association with the precision (⍴ = -0.58, p < 1e-9) as
+well as recall (⍴ = -0.53, p < 1e-8). In our benchmark, the 22
+strains with < 95% species marker genes or a noise index > 0.25
 had substantially lower F1 scores than those that passed this quality
-control (median of 0.83 versus 0.92, p &lt; 1e-5 by MWU test). We
+control (median of 0.83 versus 0.92, p < 1e-5 by MWU test). We
 propose using these two criteria together in order to exclude inferred
 strains with lower accuracy gene content estimates.
 
@@ -459,7 +459,7 @@ just one subject, and only 34% were detected in three or more (Fig. 3B).
 Strain sharing was dramatically more common in pairs of samples from the
 same subject than in pairs of samples from different subjects (mean of
 36.7 shared, detected strains from same subject vs. 0.7 from different
-subjects, p&lt;1e-10 by MWU; Fig. 3C), consistent with prior studies of
+subjects, p < 1e-10 by MWU; Fig. 3C), consistent with prior studies of
 the HMP2 and other cohorts [@lloyd-priceStrainsFunctionsDynamics2017].
 
 Concordant with this level of strain diversity, estimated genotypes for
@@ -526,7 +526,7 @@ shell, and cloud prevalence classes. Dots representing each COG category
 red and blue indicating enrichment and depletion, respectively. Dot size
 reflects the number of genes in that prevalence class that are in the
 given functional category. All enrichments/depletions shown are
-significant (Two-tailed Fisher Exact Test; p &lt; 0.05), except for
+significant (Two-tailed Fisher Exact Test; p < 0.05), except for
 those marked with a black cross. COG categories A, B, and Y are omitted,
 as these had very few members (173, 74, and 0 genes, respectively).
 **(D)** Gene co-occurrence clusters based on estimated gene content. The
@@ -550,13 +550,13 @@ content for 10 or more inferred strains (Median: 17 inferred strains per
 species, IQR: 12–28, 7 phyla). For each species, we calculated the
 prevalence and distribution of genes across strains. Gene prevalence
 estimates based on inferred strains were highly correlated with the
-prevalence observed in high-quality reference genomes (r = 0.84, p &lt;
+prevalence observed in high-quality reference genomes (r = 0.84, p <
 1e-10; Fig. 4A), supporting the consistency of our estimates with the
 existing reference database.
 
 Based on these de novo prevalence estimates, we assigned genes to the
-“core” (≥ 90% prevalence), “shell” (&lt; 90% and ≥ 15%), or “cloud”
-(&lt; 15%) pangenome fractions. We then calculated the portion of
+“core” (≥ 90% prevalence), “shell” (< 90% and ≥ 15%), or “cloud”
+(< 15%) pangenome fractions. We then calculated the portion of
 estimated gene content that fell into each prevalence class for each
 inferred strain (Fig. 4B). Computing the median first within and then
 across species, genes in the core fraction made up 70% (IQR: 63–76%) of
@@ -586,9 +586,9 @@ members, a median of 681.5 per species (Fig. 4D). Genes in the same
 cluster were more likely to have related annotations; clusters having
 three or more genes in the same KEGG module were 12.7x more common than
 expected by random chance (n = 100 permutations of cluster labels within
-species, p &lt; 1e-2; Fig. 4E). Likewise, phage- or plasmid-associated
+species, p < 1e-2; Fig. 4E). Likewise, phage- or plasmid-associated
 genes were more frequently found in the same clusters than expected by
-chance (three or more shared annotations 2.4x more common, p &lt; 1e-2;
+chance (three or more shared annotations 2.4x more common, p < 1e-2;
 Fig. 4F). This supports our interpretation of StrainPGC–enabled gene
 co-occurrence clustering across genomes as evidence of related
 biochemical function or linked transmission, which may help to generate
@@ -783,7 +783,7 @@ method. Together, these updates clean, functionally annotate, and expand
 the phylogenetic coverage of MIDAS pangenome profiling, providing a
 foundation for accurately estimating and interpreting gene content
 across species. MIDAS v3 is available at
-&lt;https://github.com/czbiohub-sf/MIDAS2&gt; and can be installed using
+<https://github.com/czbiohub-sf/MIDAS2> and can be installed using
 conda or Docker. Compatible, pre-built MIDAS databases based on UHGG
 [@Almeida2021] v2.0 and GTDB [@parksGTDBOngoingCensus2022] r202 will be available in
 the near future. We use the UHGG database throughout this work.
@@ -897,8 +897,8 @@ the 75% ANI OGF level.
 ### Reference genomes and species marker genes
 
 High-quality reference genomes in the UHGG were defined as those with
-estimated completeness of &gt; 90% and contamination of &lt; 5%. OGFs
-found in &gt; 95% of high-quality reference genomes were selected as
+estimated completeness of > 90% and contamination of < 5%. OGFs
+found in > 95% of high-quality reference genomes were selected as
 species marker genes and were used for species depth estimation, quality
 control, and downstream analyses.
 
@@ -921,9 +921,9 @@ match the expected species.
 ### Strain tracking and genotyping
 
 For each species, SNP profiles obtained from GT-Pro were filtered to
-remove low-depth samples (those with &lt;5% of positions observed). For
+remove low-depth samples (those with < 5% of positions observed). For
 the HMP2 and UCFMT datasets, low polymorphism positions (minority allele
-observed in &lt;5% of samples) were also removed. However, this latter
+observed in < 5% of samples) were also removed. However, this latter
 filter was not applied to the synthetic community since many species had
 only one strain. Strain genotypes and proportions were estimated with
 StrainFacts v0.6.0, using the updated Model 4 and a number of strains
@@ -940,7 +940,7 @@ pi\_hyper=1e-3 pi\_hyper2=1e-3 gamma\_hyper=0.1 rho\_hyper=10.0
 rho\_hyper2=10.0 --anneal-steps 20000\`.
 
 Each strain-pure set was defined as those samples where StrainFacts
-estimated it to be &gt; 95% of the species. For analyses requiring
+estimated it to be > 95% of the species. For analyses requiring
 estimated genotypes, we used a consensus genotype for each strain,
 pooling all samples in the strain-pure set. Based on this pooling, the
 consensus genotype for each strain was the majority allele at each
@@ -955,8 +955,8 @@ between inferred strain, reference, and benchmark genotypes were
 calculated as the masked Hamming distance, with a pseudocount of 1
 added, i.e.:
 
-$d(Gi, Gj) = \frac{P\_{\Delta} + 1}{P\_{\*} + 1}$ where $P\_{\Delta}$ is
-the number of positions with different allele and $P\_{\*}$ is the
+$d(G_i, G_j) = \frac{P_{\Delta} + 1}{P_{*} + 1}$ where $P_{\Delta}$ is
+the number of positions with different allele and $P_{*}$ is the
 number of unmasked positions.
 
 Note that this measure of genetic distance is related to but not
@@ -977,7 +977,7 @@ StrainPGC estimates the depth of each species in each sample as the
 15%-trimmed mean depth across all species marker genes, i.e., the mean
 depth of species marker genes excluding those genes with the 15% highest
 and lowest depth. Species-free samples were defined as those with an
-estimated species depth of &lt; 0.0001x. Genes were selected using a
+estimated species depth of < 0.0001x. Genes were selected using a
 depth-ratio threshold of 0.2 and a correlation threshold of 0.4 in order
 to strike a balance between sensitivity and specificity.
 
@@ -988,12 +988,12 @@ procedure used for the MIDASDB to EggNOG mapper annotations, which
 include COGs, COG categories, EggNOG OGs, KOs, and KEGG Modules. We
 augmented the COG categories assigned by EggNOG mapper with additional
 categories available from
-&lt;[<u>https://ftp.ncbi.nlm.nih.gov/pub/COG/COG2020/data/</u>](https://ftp.ncbi.nlm.nih.gov/pub/COG/COG2020/data/)&gt;.
+<https://ftp.ncbi.nlm.nih.gov/pub/COG/COG2020/data>.
 Since annotations were performed on representative sequences for each
 dereplicated gene (99% ANI cluster), we first transferred specific
 annotations to all cluster members. Annotations within each gene (75%
 ANI cluster) were then counted as votes. Any annotations possessed by
-&gt; 50% of member sequences were assigned to the gene family as a
+> 50% of member sequences were assigned to the gene family as a
 whole. Note that while the annotation voting for the MIDASDB, described
 above, operates on binary annotations (e.g., it is or is not a phage
 gene), this additional voting procedure was performed for individual
@@ -1030,12 +1030,12 @@ input to all three tools. Both alternative tools have several parameters
 that control when they fail to run on low sequencing depth datasets.
 Since, for some species, the use of default parameter values results in
 a runtime exception, we adjusted these parameters to be much more
-lenient. For PanPhlAn, we used the flags: \`--left\_max 1000000
---right\_min 0 --min\_coverage 0\`. For StrainPanDA, we made
+lenient. For PanPhlAn, we used the flags: `--left_max 1000000
+--right_min 0 --min_coverage 0`. For StrainPanDA, we made
 modifications to the code (see
-&lt;https://github.com/bsmith89/StrainPanDA&gt;) and used the flags
-\`--mincov 10 --minfrac 0.9 --minreads 1e6 --minsamples 1\`. We also
-fixed the number of latent strains to 6 using \`--max\_rank 6 --rank 6\`
+<https://github.com/bsmith89/StrainPanDA>) and used the flags
+`--mincov 10 --minfrac 0.9 --minreads 1e6 --minsamples 1`. We also
+fixed the number of latent strains to 6 using `--max_rank 6 --rank 6`
 for all runs. For PanPhlAn and StrainPanDA, the inferred strain with the
 highest F1 score was used for performance comparisons.
 
@@ -1047,20 +1047,19 @@ accuracy. Strains with fewer than 100 unmasked positions in their
 consensus genotype were included in benchmarking but excluded from all
 other analyses. This criterion *a priori* excludes 19 of the 627 species
 profiled in this work. For analyses of gene content, strains with an
-estimated depth of &lt; 1x across all strain-pure samples were also
-excluded. Finally, strains with &lt; 90% of species genes or with a
+estimated depth of < 1x across all strain-pure samples were also
+excluded. Finally, strains with < 90% of species genes or with a
 standard deviation in the log10-transformed depth-ratio across selected
-genes of &gt; 0.75 were flagged as low quality and removed.
+genes of > 0.75 were flagged as low quality and removed.
 
 ### Analysis of species and strain diversity
 
 The species phylogeny in Fig. 2A and Fig. 3E was obtained directly from
-the UHGG
-([<u>https://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify\_genomes/human-gut/v2.0.2/phylogenies/bac120\_iqtree.nwk</u>](https://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_genomes/human-gut/v2.0.2/phylogenies/bac120_iqtree.nwk)).
+the UHGG <https://ftp.ebi.ac.uk/pub/databases/metagenomics/mgnify_genomes/human-gut/v2.0.2/phylogenies/bac120_iqtree.nwk>.
 
 For the analysis of strain distribution in the HMP2, strain depth was
 estimated as the product of the estimated species depth and estimated
-strain fraction. All strains with depth &gt;0.1x were considered to be
+strain fraction. All strains with depth > 0.1x were considered to be
 “present” in a sample. The number of strains in each subject was
 calculated as the total number of strains present in any of that
 subject’s samples. For shared-strain analysis (Fig. 3C), samples with
@@ -1077,7 +1076,7 @@ difference in means (i.e., the difference in prevalence).
 
 To calculate the correlation between gene prevalence in reference
 genomes and inferred strains we first removed genes that were very rare
-(&lt;1%) in both.
+(< 1%) in both.
 
 Genes found in no more than one or missing from no more than one genome
 were excluded from clustering analysis. The remaining genes were then
@@ -1102,7 +1101,7 @@ co-occurrence clusters were defined using the HMP2 inferred strains, not
 
 Code and metadata needed to replicate our analyses and plots are
 available at
-&lt;[<u>https://github.com/bsmith89/StrainPGC-manuscript</u>](https://github.com/bsmith89/StrainPGC-manuscript)&gt;.
+<https://github.com/bsmith89/StrainPGC-manuscript>.
 
 # Additional Details
 
@@ -1149,7 +1148,7 @@ thank Françoise Chanut for extensive editorial support.
 
 Supplementary results and code to reproduce our analyses and figures are
 integrated into analysis notebooks available at
-&lt;https://github.com/bsmith89/StrainPGC-manuscript&gt;.
+<https://github.com/bsmith89/StrainPGC-manuscript>.
 
 ![**Figure S1: Relationship between sequencing depth and the accuracy of
 gene content estimation.** Points represent the performance of each tool
