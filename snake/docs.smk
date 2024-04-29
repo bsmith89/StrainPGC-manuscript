@@ -4,8 +4,9 @@ rule sort_bib_from_raw:
     input:
         script="scripts/sort_bib.py",
         bib=["doc/bibliography_raw.bib"],
+    conda: "conda/pandoc.yaml"
     shell:
-        "{input.script} {input.bib} > {output}"
+        "python {input.script} {input.bib} > {output}"
 
 rule render_pdf_to_png_imagemagick:
     output:
@@ -49,10 +50,11 @@ rule build_manuscript_docx:
             "fig/accuracy_by_depth_figure.dpi200.png",
             "fig/genome_fraction_refs_figure.dpi200.png",
         ],
+    conda: "conda/pandoc.yaml"
     shell:
         """
         pandoc --from markdown --to docx \
-               --standalone --self-contained --reference-doc {input.template} \
+               --embed-resources --standalone --reference-doc {input.template} \
                --filter pandoc-crossref --csl {input.csl} --citeproc \
                --bibliography={input.bib} -s {input.source} -o {output}
         """
