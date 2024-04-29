@@ -199,8 +199,7 @@ diverse collection of publicly available metagenomes from the human gut
 microbiome and find gene content variation with potential clinical
 relevance.
 
-<img src="media/image4.png" style="width:6.5in;height:4.19444in" />**Figure
-1: Conceptual overview of strain-resolved gene content reconstruction
+![**Figure 1: Conceptual overview of strain-resolved gene content reconstruction
 using StrainPGC**. **(A)** Schematic representation of pangenome
 profiling, which estimates gene depth based on short-read alignment. The
 illustration represents profiling of a hypothetical microbial population
@@ -239,6 +238,7 @@ the strain-specific gene into the selection region (dashed arrow),
 increasing accuracy. **(E)** Schematic depiction of our integrated
 workflow to infer gene content across strains using only shotgun
 metagenomic reads as input.
+](fig/concept_diagram_figure.dpi200.png)
 
 # Results
 
@@ -296,9 +296,7 @@ Snakemake [@molderSustainableDataAnalysis2021a] and is available at
 
 ## StrainPGC accurately estimates gene content of strains in a complex synthetic community
 
-<img src="media/image7.png" style="width:6.5in;height:6.5in" />
-
-**Figure 2: Evaluation of StrainPGC’s gene content estimation
+![**Figure 2: Evaluation of StrainPGC’s gene content estimation
 performance on a highly diverse, synthetic community [@jinCulturingComplexGut2023].**
 **(A)** Schematic diagram of our procedure for benchmarking gene content
 estimates using a synthetic community constructed to reflect the species
@@ -325,6 +323,7 @@ falling in each (x, y) bin; density above the 1-to-1 diagonal (dotted
 line) indicates strains where StrainPGC outperformed the alternative on
 that index. The relationship between accuracy and sequencing depth is
 shown in Supplementary Figure S1.
+](fig/benchmarking_figure.dpi200.png)
 
 In order to evaluate StrainPGC’s performance, we ran our workflow on
 publicly available metagenomes from a diverse, synthetic bacterial
@@ -407,9 +406,7 @@ strains with lower accuracy gene content estimates.
 
 ## Inferred strains in publicly available metagenomes substantially expand the catalog of intraspecific diversity
 
-<img src="media/image6.png" style="width:6.5in;height:6.5in" />
-
-**Figure 3: Strain diversity in the HMP2 metagenome collection.**
+![**Figure 3: Strain diversity in the HMP2 metagenome collection.**
 **(A–B)** Histograms reflecting the distribution of inferred strains of
 any species across subjects in the HMP2 metagenome collection. **(A)**
 Number of strains for 106 subjects, summed over all samples (median of
@@ -443,6 +440,7 @@ strains is calculated after batch correction (see Methods). Points
 reflecting each of 28 inferred *E. coli* strains are also shown. Green
 contours in the main panel reflect deciles in the 2D kernel density
 estimator.
+](fig/hmp2_diversity_figure.dpi200.png)
 
 We applied our workflow to the 106 subjects and 1338 samples of the HMP2
 metagenome collection—which we refer to as simply the HMP2 throughout
@@ -507,9 +505,7 @@ gene content variation in the gut microbiome.
 
 ## Estimated gene content enables pangenome analyses in prevalent human gut microbes
 
-<img src="media/image2.png" style="width:6.5in;height:6.5in" />
-
-**Figure 4: StrainPGC reveals patterns of gene content variation across
+![**Figure 4: StrainPGC reveals patterns of gene content variation across
 dozens of species.** **(A)** Gene prevalence across inferred strains
 from HMP2 is very similar to prevalence in reference genomes. Combining
 genes from all species, the 2D histogram shows the joint distribution of
@@ -546,6 +542,7 @@ null distribution). The higher number of clusters with multiple, shared
 annotations in the observed data compared to the null suggests clumping
 of **(E)** KEGG module and **(F)** phage or plasmid genes into
 co-occurrence clusters.
+](fig/pangenomics_figure.dpi200.png)
 
 To demonstrate the value of gene content estimates derived from the HMP2
 for pangenome analysis, we focused on the 99 species with estimated gene
@@ -604,9 +601,7 @@ analyses.
 
 ## Integrative analysis of *E. coli* strain gene content can inform the selection of donors for fecal microbiota transplantation
 
-<img src="media/image1.png" style="width:4.58756in;height:7.34722in" />
-
-**Figure 5: Different donors in a fecal microbiota transplant (FMT)
+![**Figure 5: Different donors in a fecal microbiota transplant (FMT)
 trial [@smithStrainresolvedAnalysisRandomized2022] have engrafting *E. coli* strains that differ in
 their functional potential. (A)** *E. coli* strains found in repeated
 sampling of two independent donors’ fecal materials (boxed panels) and
@@ -632,6 +627,7 @@ highlight the high-engraftment strains from panel (A). **(C, D)**
 Estimated gene content that is shared and distinct between the two
 high-engraftment strains. Venn diagrams depict the intersection of
 **(C)** genes and **(D)** gene co-occurrence clusters.
+](fig/ucfmt_figure.dpi200.png)
 
 We next sought to assess the potential utility of StrainPGC gene content
 estimates for optimizing microbial therapies such as FMT. Current donor
@@ -1132,22 +1128,22 @@ thank Françoise Chanut for extensive editorial support.
 ## Author Contributions
 
 -   BJS: Conceptualization, Methodology, Software, Formal Analysis,
-    > Investigation, Writing – Original Draft, Writing – Review &
-    > Editing, Visualization
+    Investigation, Writing – Original Draft, Writing – Review &
+    Editing, Visualization
 
 -   CZ: Conceptualization, Methodology, Software, Writing – Original
-    > Draft, Writing – Review & Editing
+    Draft, Writing – Review & Editing
 
 -   VD: Writing – Review & Editing, Visualization
 
 -   XJ: Writing – Original Draft, Writing – Review & Editing,
-    > Visualization
+    Visualization
 
 -   JA: Data Curation, Writing – Review & Editing
 
 -   KP: Conceptualization, Methodology, Investigation, Resources,
-    > Writing – Original Draft, Writing – Review & Editing,
-    > <span class="mark">Supervision, Funding Acquisition</span>
+    Writing – Original Draft, Writing – Review & Editing,
+    Supervision, Funding Acquisition
 
 # Supplementary Materials
 
@@ -1155,21 +1151,20 @@ Supplementary results and code to reproduce our analyses and figures are
 integrated into analysis notebooks available at
 &lt;https://github.com/bsmith89/StrainPGC-manuscript&gt;.
 
-<img src="media/image5.png" style="width:4.5in;height:7.07292in" />
-
-**Figure S1: Relationship between sequencing depth and the accuracy of
+![**Figure S1: Relationship between sequencing depth and the accuracy of
 gene content estimation.** Points represent the performance of each tool
 (colors) on each of the 105 benchmark strains. The horizontal position
 reflects the estimated maximum depth for the genotype-matched strain
 across samples. Trend lines are a rolling average over the 10 nearest
 points.
+](fig/accuracy_by_depth_figure.dpi200.png)
 
-<img src="media/image3.png" style="width:2.88542in;height:2.75in" />
-
+![
 **Figure S2: Per-genome core, shell, and cloud gene fractions in
 reference genomes.** Equivalent results to Fig. 4B, here calculated
 using reference genomes for comparison to StrainPGC-based gene content
 estimates.
+](fig/genome_fraction_refs_figure.dpi200.png)
 
 -   Supplementary Table 1: Details about all inferred strains in HMP2
 
