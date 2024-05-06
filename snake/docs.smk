@@ -15,6 +15,7 @@ rule render_pdf_to_png_imagemagick:
         "fig/{stem}.pdf",
     params:
         dpi=lambda w: int(w.dpi),
+    conda: "conda/pandoc.yaml"
     shell:
         """
         convert -units PixelsPerInch -density {params.dpi} {input} {output}
@@ -27,6 +28,7 @@ rule render_figure_to_pdf:
         "fig/{stem}_figure.pdf",
     input:
         "doc/static/{stem}_figure.svg",
+    conda: "conda/pandoc.yaml"
     shell:
         """
         inkscape {input} --export-filename {output}
@@ -62,3 +64,34 @@ rule build_manuscript_docx:
 
 localrules:
     build_manuscript_docx,
+
+
+rule compile_manuscript_submission:
+    output: directory("build/submission")
+    input:
+        docx="build/manuscript.docx",
+        coverletter="doc/manuscript/coverletter-genome-research.docx",
+        fig1="fig/concept_diagram_figure.pdf",
+        fig2="fig/benchmarking_figure.pdf",
+        fig3="fig/hmp2_diversity_figure.pdf",
+        fig4="fig/pangenomics_figure.pdf",
+        fig5="fig/ucfmt_figure.pdf",
+        figS1="fig/accuracy_by_depth_figure.pdf",
+        figS2="fig/genome_fraction_refs_figure.pdf",
+        tableS1="fig/hmp2_inferred_strains_supplementary_table1.tsv",
+        tableS2="fig/ucfmt_focal_strain_genes_supplementary_table2.tsv",
+    shell:
+        """
+        mkdir -p {output}
+        cp {input.docx} {output}/manuscript.docx
+        cp {input.coverletter} {output}/coverletter.docx
+        cp {input.fig1} {output}/Figure_1.pdf
+        cp {input.fig2} {output}/Figure_2.pdf
+        cp {input.fig3} {output}/Figure_3.pdf
+        cp {input.fig4} {output}/Figure_4.pdf
+        cp {input.fig5} {output}/Figure_5.pdf
+        cp {input.figS1} {output}/Supplementary_Figure_S1.pdf
+        cp {input.figS2} {output}/Supplementary_Figure_S2.pdf
+        cp {input.tableS1} {output}/Supplementary_Table_S1.tsv
+        cp {input.tableS2} {output}/Supplementary_Table_S2.tsv
+        """

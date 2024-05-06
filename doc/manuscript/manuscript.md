@@ -17,16 +17,14 @@ tblPrefix: [table, tables]
 ---
 
 <!--
+https://genome.cshlp.org/site/misc/ifora_mspreparation.xhtml
+
 Manual rendering checklist:
 
 TODO: Replace title/authors with cover-page from static DOCX
 TODO: Rename supplementary figures (e.g. TODO) in both
 captions and inlined citations. (Find/Replace works well. Be sure catch both Figure and Fig)
-TODO: Upgrade "Supplementary Materials" to Title style.
-TODO: Split out supplementary, by save-as a new DOCX and then remove the other parts.
-TODO: Split References into Supp. and non-supp parts (manually, since not numbered)
-    Find references in the supplementary, check if they're in the main, and
-    then copy them from the main into the supplementary section.
+TODO: Rename supplementary filenames: "Supplemental_Fig_S1.pdf", "Supplemental_Table_S1.xls"
 TODO: Add page-break after abstract
 TODO: Figure placement (one of): Move figures up or down to minimize
 whitespace, OR move all figure legends to after the references and remove the
@@ -36,7 +34,7 @@ submission to the old. Then edit this document to remove figure replacements,
 citation renumbering, etc.
 TODO: If for submission, move figures and table to after references.
 TODO: Resize figures that are too large.
-TODO: Move Author Contributions to after the references TODO??
+TODO: Move Author Contributions to after the references
 TODO: Add page breaks as appropriate.
 TODO: Bold Figure N, Table N in captions
 TODO: Table caption (or just footnotes?) to below tables.
@@ -105,7 +103,7 @@ catalog the functional repertoires of thousands of strains across
 hundreds of species, capturing extensive diversity missing from
 reference databases. Finally, we apply StrainPGC to metagenomes from a
 clinical trial of fecal microbiota transplantation for the treatment of
-ulcerative colitis. We identify two *Escherichia coli* strains from two
+ulcerative colitis. We identify two _Escherichia coli_ strains from two
 different donors that are both frequently transmitted to patients, but
 have notable differences in functional potential. StrainPGC and MIDAS v3
 together enable precise, intraspecific pangenomic investigations using
@@ -130,7 +128,7 @@ content between strains [@plazaonateMSPminerAbundancebasedReconstitution2019a]. 
 to study the functional consequences of strain-level variation in the
 gut microbiome.
 
-The most common way to study intraspecific variation *in situ* is to
+The most common way to study intraspecific variation _in situ_ is to
 quantify the gene families present in shotgun metagenomes—an approach
 referred to as "pangenome profiling". Pangenome profiling estimates the
 mean sequencing depth—sometimes called vertical coverage—of a gene
@@ -138,7 +136,7 @@ family as the mean number of reads aligning to each base of a
 representative sequence [@milaneseMicrobialAbundanceActivity2019b] (Fig. 1A). (For brevity, we
 use "gene" as short-hand for gene family and "depth" for mean sequencing
 depth throughout this paper.) Several existing tools, including PanPhlAn
-[@beghiniIntegratingTaxonomicFunctional2021] and MIDAS [@Zhao2022;@nayfachIntegratedMetagenomicsPipeline2016a] perform pangenome
+[@beghiniIntegratingTaxonomicFunctional2021] and MIDAS [@zhaoMIDAS2MetagenomicIntraspecies2023;@nayfachIntegratedMetagenomicsPipeline2016a] perform pangenome
 profiling. However, due to several sources of error in quantifying gene
 depth, a second algorithm is needed to infer which genes are actually
 present in a specific strain’s genome, a step that we call gene content
@@ -149,34 +147,35 @@ assumption that all encoded genes will be at a similar depth: the same
 as the overall species depth [@plazaonateMSPminerAbundancebasedReconstitution2019a], which can be directly
 estimated from the depth of species marker genes
 [@blanco-miguezExtendingImprovingMetagenomic2023;@milaneseMicrobialAbundanceActivity2019b]. Therefore, the depth ratio—the
-ratio of a given gene’s depth and the overall species depth—can be used
+ratio of a given gene’s depth to the overall species depth—can be used
 as the key criterion for the selection of genes [@nayfachIntegratedMetagenomicsPipeline2016a].
 
 However, gene content estimation using pangenome profiles faces four key
 challenges (Fig. 1A, B):
 
 1.  an incomplete set of representative gene sequences in pangenome
-    > reference databases,
+    reference databases,
 
 2.  ambiguous alignment of short-reads to multiple sequences both within
-    > and across species ("cross-mapping"),
+    and across species ("cross-mapping"),
 
-3.  poor discrimination between present and absent genes at low depth
-    > due to high variance of the depth ratio, and
+3.  poor discrimination between present and absent genes for species at low
+    depth due to high variance of the depth ratio, and
 
-4.  a low depth ratio for strain-specific genes when other strains of
-    > the same species are also abundant ("strain mixing").
+4.  a decreased depth ratio for strain-specific genes when other strains of
+    the same species are also abundant ("strain mixing").
 
 Significant progress towards (1) has been recently achieved by expanding
 pangenome reference databases to include metagenome assembled genomes
-(MAGs), substantially improving their completeness [@Almeida2021].
+(MAGs), substantially improving their completeness [@almeidaUnifiedCatalog2042021].
 However, cross-species contamination and genome assembly errors like
 gene fragmentation, which are common in MAGs, can exacerbate
 cross-mapping (2), reducing the accuracy of pangenome profiling
-[@Zhao2023]. Careful curation of the pangenome database is needed to
+[@zhaoPitfallsGenotypingMicrobial2023]. Careful curation of the pangenome database is needed to
 reduce the impact of these issues. One promising approach for dealing
 with low depth (3), is to combine data across multiple samples (Fig. 1C)
-[@carrReconstructingGenomicContent2013a;@plazaonateMSPminerAbundancebasedReconstitution2019a], taking advantage of increased depth from
+[@carrReconstructingGenomicContent2013a;@plazaonateMSPminerAbundancebasedReconstitution2019a],
+taking advantage of increased depth from
 pooling reads. As a bonus, the correlation between the species depth and
 gene depth can be used as an additional criterion to better exclude
 genes with cross-mapping (2; Fig 1D). However, combining samples can
@@ -185,7 +184,8 @@ strain-aware gene content estimation that benefit from the increased
 sensitivity and specificity of multiple samples while also accounting
 for intraspecific variation.
 
-Here we introduce StrainPGC, a computational method that leverages
+Here we introduce StrainPGC ("Strain Pure Gene Content"),
+a computational method that leverages
 modern strain tracking tools to separate samples into strain-pure
 subsets in order to accurately estimate gene content based on
 multi-sample pangenome profiling (Fig. 1C, D). We also describe changes
@@ -249,20 +249,20 @@ developed an integrated pipeline that takes as input shotgun metagenomes
 and outputs a holistic picture of microbial strains and their gene
 content. Our workflow builds on several other tools specifically
 designed for strain-resolved analyses of the human gut microbiome:
-first, GT-Pro [@Shi20TODO], an assembly-free algorithm for tallying
+first, GT-Pro [@shiFastAccurateMetagenotyping2021], an assembly-free algorithm for tallying
 single-nucleotide polymorphisms in shotgun metagenomic reads, and
-second, StrainFacts [@Smith2023], which harnesses these SNP profiles
+second, StrainFacts [@smithScalableMicrobialStrain2022a], which harnesses these SNP profiles
 to precisely identify and quantify the relative abundance of individual
 strains within species. We also perform pangenome profiling using MIDAS
-[@ZhaoTODO;@nayfachIntegratedMetagenomicsPipeline2016a]. Importantly, we updated MIDAS in order to
+[@zhaoMIDAS2MetagenomicIntraspecies2023;@nayfachIntegratedMetagenomicsPipeline2016a].
+We made major upgrades to MIDAS in order to
 improve the completeness, curation, and interpretability of pangenome
-profiles. We made major upgrades to the pangenome database build process
-as well as the profiling algorithm and released these as MIDAS v3 (see
-Methods).
+profiles. We updated the pangenome database build process
+as well as the profiling algorithm (see Methods) and released these as MIDAS v3.
 
 Our overall workflow (Fig. 1E) is divided into three major stages:
 First, we profile pangenomes, SNPs, and strains with MIDAS v3, GT-Pro,
-and StrainFacts. Next, we assign genes to strains with the core
+and StrainFacts, respectively. Next, we assign genes to strains with the core
 StrainPGC algorithm. Finally, we quality control strains, identifying
 and removing those likely to be of low accuracy.
 
@@ -288,7 +288,7 @@ genome (Fig. 1D).
 StrainPGC is open source and freely available at
 <https://github.com/bsmith89/StrainPGC>.
 While the work presented here uses MIDAS v3 and the comprehensive UHGG
-genome collection [@Almeida2021], the core StrainPGC software is
+genome collection [@almeidaUnifiedCatalog2042021], the core StrainPGC software is
 designed to also work with pangenome profiling and strain tracking from
 alternative tools. Our integrated analysis workflow is implemented with
 Snakemake [@molderSustainableDataAnalysis2021a] and is available at
@@ -300,7 +300,7 @@ Snakemake [@molderSustainableDataAnalysis2021a] and is available at
 performance on a highly diverse, synthetic community [@jinCulturingComplexGut2023].**
 **(A)** Schematic diagram of our procedure for benchmarking gene content
 estimates using a synthetic community constructed to reflect the species
-and strain diversity found in human gut microbiomes [@Cheng2022].
+and strain diversity found in human gut microbiomes [@chengDesignConstructionVivo2022].
 StrainPGC and alternative tools were applied to pangenome profiles from
 different samples derived from the synthetic community, and estimates of
 gene content were compared to high-quality reference genomes for 105
@@ -315,7 +315,7 @@ diagonal (dashed line) when the sample with the highest depth
 contributes more of their total depth. Some species are represented by
 more than one strain (marker shape). **(C)** Accuracy of gene content
 estimates by StrainPGC (y-axis) compared to PanPhlAn [@beghiniIntegratingTaxonomicFunctional2021]
-and StrainPanDA [@Hu2022] (x-axes), as measured by precision, recall,
+and StrainPanDA [@huStrainPanDALinkedReconstruction2022] (x-axes), as measured by precision, recall,
 and F1. All three indices range between 0 and 1, and higher values
 reflect better performance. The data are represented as two-dimensional
 histograms using a gray density scale to represent the number of strains
@@ -327,7 +327,7 @@ shown in Supplementary Figure S1.
 
 In order to evaluate StrainPGC’s performance, we ran our workflow on
 publicly available metagenomes from a diverse, synthetic bacterial
-community grown *in vitro* under five different experimental conditions
+community grown _in vitro_ under five different experimental conditions
 (276 metagenomes in total) [@jinCulturingComplexGut2023]. The initial inoculum of this
 community was composed of 117 bacterial isolates spanning 8 phyla, each
 with a high-quality genome assembly, which we refer to as ground truth
@@ -376,7 +376,7 @@ process, these findings support the idea that StrainPGC’s use of
 correlation across strain-pure samples allows us to maintain high
 precision even while increasing recall. In particular, we find our
 approach maintains this specificity even at low depths more effectively
-than existing methods.
+than existing methods (Supplementary Figure S1).
 
 In real-world applications—where ground-truth gene content is not known
 a priori—it is beneficial to understand the confidence of StrainPGC
@@ -437,7 +437,7 @@ marginal distributions (panels above and to the right) are plotted for
 all high-quality reference (gray background) and inferred (green
 contours) strains of all species. Gene content dissimilarity of inferred
 strains is calculated after batch correction (see Methods). Points
-reflecting each of 28 inferred *E. coli* strains are also shown. Green
+reflecting each of 28 inferred _E. coli_ strains are also shown. Green
 contours in the main panel reflect deciles in the 2D kernel density
 estimator.
 ](fig/hmp2_diversity_figure.dpi200.png)
@@ -496,8 +496,8 @@ dissimilarity using the cosine dissimilarity after batch correction (see
 Methods), inferred strains were a median of 0.18 from the closest,
 high-quality reference genome (Fig. 3F). As would be expected, strains
 with more dissimilar SNP genotypes were often those with dissimilar gene
-content as well. For instance, across the 28 inferred strains of *E.
-coli*, we found a significant correlation between the gene
+content as well. For instance, across the 28 inferred strains of _E.
+coli_, we found a significant correlation between the gene
 content dissimilarity and the genotype dissimilarity (Spearman’s ⍴ =
 0.44, p = 0.018; Fig. 3F). This suggests that the increased diversity
 captured by StrainPGC facilitates expanded analyses of intraspecific
@@ -561,7 +561,8 @@ estimated gene content that fell into each prevalence class for each
 inferred strain (Fig. 4B). Computing the median first within and then
 across species, genes in the core fraction made up 70% (IQR: 63–76%) of
 each strain’s estimated gene content, shell fraction 25% (19–28%), and
-cloud fraction 5% (4–9%), in general agreement with reference genomes.
+cloud fraction 5% (4–9%), in general agreement with reference genomes
+(Supplementary Figure S2).
 Certain categories of functional annotations were more common in each
 fraction (Fig. 4C). Core genes were enriched for COG categories with
 housekeeping functions, such as translation, cytoskeleton, and the
@@ -570,8 +571,11 @@ lipids. The shell pangenome, on the other hand, was enriched in
 functional categories including carbohydrate and inorganic ion transport
 and metabolism, and extracellular structures. Finally, the cloud
 pangenome was enriched in functional categories including the mobilome,
-DNA replication, recombination and repair, and defense mechanisms, as
-well as genes without a COG category. Broadly, these patterns of
+defense mechanisms, as well as genes without a COG category.
+The COG category for DNA replication, recombination, and repair
+was also enriched in the cloud pangenome, likely due to frequent co-annotation
+with the mobilome.
+Broadly, these patterns of
 enrichment confirm our expectations that core genes perform obligate
 functions and make up a plurality of genes for most strains.
 
@@ -599,16 +603,16 @@ Overall, large surveys of gene content estimated by StrainPGC have the
 potential to vastly expand the coverage and diversity of pangenome
 analyses.
 
-## Integrative analysis of *E. coli* strain gene content can inform the selection of donors for fecal microbiota transplantation
+## Integrative analysis of _E. coli_ strain gene content can inform the selection of donors for fecal microbiota transplantation
 
 ![**Figure 5: Different donors in a fecal microbiota transplant (FMT)
-trial [@smithStrainresolvedAnalysisRandomized2022] have engrafting *E. coli* strains that differ in
-their functional potential. (A)** *E. coli* strains found in repeated
+trial [@smithStrainresolvedAnalysisRandomized2022] have engrafting _E. coli_ strains that differ in
+their functional potential. (A)** _E. coli_ strains found in repeated
 sampling of two independent donors’ fecal materials (boxed panels) and
 in the fecal time series of their respective recipients. Columns in each
-panel represent individual samples, colors represent *E. coli* strains
+panel represent individual samples, colors represent _E. coli_ strains
 inferred from StrainFacts, and the height of colored bars indicates
-strain abundance normalized to total *E. coli* abundance in the sample.
+strain abundance normalized to total _E. coli_ abundance in the sample.
 For donors, samples are ordered arbitrarily. Recipient samples are
 ordered by collection day and include samples at baseline (labeled "B")
 collected before initial FMT treatment, samples collected before each of
@@ -618,7 +622,7 @@ samples were also collected after antibiotic treatment and before FMT
 (labeled "pA", post-antibiotics). For each donor, one strain (tan in
 D44, aqua in D97) showed a high rate of engraftment in recipients at
 follow-up. **(B)** Comparison of shell gene content between inferred
-strains from the FMT experiment (18 strains) and *E. coli* strains from
+strains from the FMT experiment (18 strains) and _E. coli_ strains from
 the HMP2 (28). Heatmap indicates the presence and absence of genes
 (rows) across inferred strains (columns). Strains are ordered by UPGMA
 tree of estimated SNP genotype dissimilarity. Genes are filtered to only
@@ -637,17 +641,17 @@ engraftment of particular microbial functions. To assess the sensitivity
 of our approach for comparing donor strains, we re-analyzed metagenomes
 from a previously published study of FMT for the treatment of ulcerative
 colitis [@smithStrainresolvedAnalysisRandomized2022]. We refer to these metagenomes as the UCFMT
-dataset. As a proof-of-concept, we focused on strains of *Escherichia
-coli*, a well-studied and highly prevalent member of the human gut
+dataset. As a proof-of-concept, we focused on strains of _Escherichia
+coli_, a well-studied and highly prevalent member of the human gut
 microbiome with well-documented examples of not only pathogenic but also
-commensal and even probiotic strains [@Blount2015].
+commensal and even probiotic strains [@blountUnexhaustedPotentialColi2015].
 
 Using 231 samples collected longitudinally from patients (189 samples)
 and donors (42 samples from three of four donors) in the UCFMT study, we
 identified and tracked strains using StrainFacts. For the two
 best-sampled donors, D44 and D97, we observed robust, repeated
 transmission of strains during FMT (Fig. 5A). Next, with StrainPGC, we
-obtained gene content estimates for inferred strains of *E. coli*; 18
+obtained gene content estimates for inferred strains of _E. coli_; 18
 passed quality control. In order to examine their genetic
 relatedness—and to put them in the context of the earlier pangenome
 analysis—we combined inferred strains from the UCFMT and HMP2
@@ -662,8 +666,8 @@ In recipients of donor D44, one strain, strain-6, stood out as
 frequently present both during six weeks of maintenance dosing and in
 subsequent follow-up sampling (Fig. 5A). Likewise, strain-9 engrafted
 frequently for recipients of D97. These two strains had a SNP genotype
-dissimilarity of 0.23, while the median dissimilarity across all pairs
-of UCFMT strains was 0.25 (IQR: 0.13 – 0.31). Approximately 80% of each
+dissimilarity of 0.23, similar to the median dissimilarity across all pairs
+of UCFMT strains of 0.25 (IQR: 0.13 – 0.31). Approximately 80% of each
 strain’s gene content was shared with the other, while 18% and 24% was
 private to strain-6 and strain-9, respectively (Fig. 5C; Supplementary
 Table 2). Cross-referencing co-occurrence clusters with the estimated
@@ -688,32 +692,33 @@ co-occurrence clusters, one (labeled clust-861) is also found only in
 strain-9, and includes genes with homology to components of a type VI
 secretion system (T6SS). Most T6SSs are involved in inter-microbial
 competition, although a role in pathogenesis has also been described
-[@navarro-garciaTypeVISecretion2019]. Another cluster private only in strain-9,
+[@navarro-garciaTypeVISecretion2019]. Another cluster private to strain-9,
 labeled clust-37, includes genes with homology to many components of a
 type IV secretion system (T4SS), other secretion systems, a helicase,
 and a component of a toxin/anti-toxin system. Combined, these
 annotations suggest that the cluster may primarily reflect a mobilizable
 plasmid in strain-9 that is missing in strain-6. Similarly, related
 annotations in several clusters (clust-351, clust-352, and clust-353)
-have homology to genes in the *pdu*-operon. This operon encodes
+have homology to genes in the _pdu_-operon. This operon encodes
 components of catabolic bacterial microcompartments, which are involved
 in various catabolic pathways, including 1,2-propanediol utilization.
 These co-occurrence clusters are found only in strain-9, and strain-6 is
-missing homology to most of the genes in the *pdu*-operon.
+missing homology to most of the genes in the _pdu_-operon.
 Microcompartments and 1,2-propanediol utilization have been associated
-with pathogenicity in *E. coli* and other species of
-*Enterobacteriaceae* [@Prentice2021].
+with pathogenicity in _E. coli_ and other species of
+_Enterobacteriaceae_ [@prenticeBacterialMicrocompartmentsTheir2021].
 
 Given the presence of AMR genes and the plausible association between
 several co-occurrence clusters and pathogenesis, we speculate that the
-engraftment of *E. coli* strain-9, found in FMT samples donated by D97,
+engraftment of _E. coli_ strain-9, found in FMT samples donated by D97,
 could result in a less beneficial or even detrimental treatment for
 recipients. Similarly, the engraftment of strain-6 from D44 might
-contribute to the competitive exclusion of related pathogenic strains.
+contribute to the competitive exclusion of more pathogenic strains.
 While the previously published study found no difference in outcomes
-between recipients of the two donors [@smithStrainresolvedAnalysisRandomized2022], this study may have
+between recipients of the two donors [@smithStrainresolvedAnalysisRandomized2022],
+that study may have
 been underpowered (n = 8 recipients for each of D44 and D97). Our
-computational predictions could be tested *in vitro* with isolates
+computational predictions could be tested _in vitro_ with isolates
 obtainable from archived donor materials.
 
 # Discussion
@@ -730,7 +735,7 @@ content for thousands of strains in the HMP2 metagenome collection,
 substantially expanding on the diversity found in reference genome
 collections and enabling analyses of intraspecific variation without
 isolation or assembly. Finally, we used StrainPGC to compare the
-functional potential of two different strains of *E. coli* that were
+functional potential of two different strains of _E. coli_ that were
 successfully transferred from two different donors in a clinical trial
 of FMT.
 
@@ -739,8 +744,8 @@ genome sequences enabled by laboratory isolation and culturing, as well
 as modern, long-read sequencing and de novo assembly from metagenomes,
 which remain the gold standard for comparative genomics. However, these
 methods are labor intensive, expensive, and often fail to capture
-low-abundance organisms [@Chen2020]. Interestingly, DESMAN
-[@Quince2017], while based on de novo assembly, takes a conceptually
+low-abundance organisms [@chenAccurateCompleteGenomes2020]. Interestingly, DESMAN
+[@quinceDESMANNewTool2017], while based on de novo assembly, takes a conceptually
 similar approach to StrainPGC, combining strain tracking with gene
 content estimation. StrainPGC identified extensive, underexplored
 diversity in the well-studied HMP2, further suggesting that many strains
@@ -785,7 +790,7 @@ foundation for accurately estimating and interpreting gene content
 across species. MIDAS v3 is available at
 <https://github.com/czbiohub-sf/MIDAS2> and can be installed using
 conda or Docker. Compatible, pre-built MIDAS databases based on UHGG
-[@Almeida2021] v2.0 and GTDB [@parksGTDBOngoingCensus2022] r202 will be available in
+[@almeidaUnifiedCatalog2042021] v2.0 and GTDB [@parksGTDBOngoingCensus2022] r202 will be available in
 the near future. We use the UHGG database throughout this work.
 
 ### Pangenome database curation and clustering
@@ -801,7 +806,8 @@ problems for gene databases constructed with MAGs, we made major changes
 to the clustering and curation pipeline. In this MIDAS update, described
 below, we sought to minimize the impact of fragmented gene sequences,
 spurious gene calls, chimeric assemblies, and redundant OGFs resulting
-from these errors [@liIntegratedCatalogReference2014;@hyattGeneTranslationInitiation2012;@dimonacoNoOneTool2022].
+from these errors
+[@liIntegratedCatalogReference2014;@hyattGeneTranslationInitiation2012;@dimonacoNoOneTool2022].
 
 For each species, for each reference genome in the source genome
 collection, genes were predicted by Prokka v1.14.6 [@seemannProkkaRapidProkaryotic2014],
@@ -825,7 +831,7 @@ clusters at thresholds between 95% and 75% ANI.
 ### Pangenome database annotation
 
 Next, we annotated sequences using a variety of tools. We ran EggNOG
-mapper v2.1.12 [@Cantalapiedra2021] on dereplicated genes to identify
+mapper v2.1.12 [@cantalapiedraEggNOGmapperV2Functional2021] on dereplicated genes to identify
 homology relative to several commonly used gene orthologies: COGs,
 EggNOG OGs, and KOs. ResFinder v4.4.2 [@florensaResFinderOpenOnline2022], geNomad
 v1.7.4 [@camargoIdentificationMobileGenetic2023] and MobileElementFinder v1.1.2
@@ -847,7 +853,8 @@ of interest.
 ### Alignment and gene depth estimation
 
 For pangenome profiling, the MIDASDB representative gene sequences from
-selected species are compiled into an index for alignment and
+selected species (i.e. dereplicated at the 99% ANI level)
+are compiled into an index for alignment and
 quantification. At this stage, we apply additional filtering to the set
 of representative sequences, which we refer to as "pruning", with the
 goal of speeding up alignment and improving quantification by reducing
@@ -860,7 +867,7 @@ their 75% ANI clusters had only one member, as these are more likely to
 be spurious gene calls or contamination resulting from chimeric
 assembly. Finally, an alignment index is constructed from the remaining
 representative sequences, and reads are mapped using Bowtie2
-[@Langmead2012].
+[@langmeadFastGappedreadAlignment2012].
 
 Pangenome profiling with MIDAS v3 proceeds through four stages: (1)
 building a reference index as described above, (2) alignment of reads to
@@ -874,12 +881,13 @@ the OGF at the chosen ANI threshold.
 All shotgun metagenomes analyzed in this work are publicly available as
 SRA BioProjects, including the HMP2 (PRJNA398089), UCFMT (PRJNA737472),
 and the synthetic community data (PRJNA885585) used for benchmarking.
-Downloaded HMP2 metagenomes had human reads removal and quality control
+The HMP2 metagenomes already had human reads removed and quality control
 procedures previously applied. UCFMT metagenomes were filtered for human
-reads, deduplicated, adapter trimmed, and quality trimmed, as described
-in [@smithStrainresolvedAnalysisRandomized2022]. Benchmark metagenomes were processed in the same way,
+reads, deduplicated, adapter trimmed, and quality trimmed, as previously described
+in [@smithStrainresolvedAnalysisRandomized2022].
+Benchmark metagenomes were processed in the same way,
 except that human read removal was skipped because the data was
-collected *in vitro*.
+collected _in vitro_.
 
 ## Integrated analysis pipeline
 
@@ -905,12 +913,12 @@ control, and downstream analyses.
 ### SNP profiling
 
 SNP profiles were obtained from metagenomes using GT-Pro v1.0.1
-[@Shi2022] and the default database, which was built using UHGG v1.0.
+[@shiFastAccurateMetagenotyping2021] and the default database, which was built using UHGG v1.0.
 GT-Pro was run on preprocessed reads, and counts from forward and
 reverse reads were summed. The resulting SNP profile matrix, a
 three-dimensional array of counts indexed by sample, genotyped position,
 and allele (reference or alternative), is the core input for StrainFacts
-[@Smith2023].
+[@smithScalableMicrobialStrain2022a].
 
 An analogous approach was used to obtain SNP genotypes for genomic
 sequence. Specifically, for both reference and benchmarking genomes,
@@ -931,12 +939,12 @@ set as $n^{0.85}$ where $n$ is the number of samples. For the vast
 majority of species, this model was fit using a single, standardized set
 of hyperparameters: `--optimizer-learning-rate 0.05
 --min-optimizer-learning-rate 1e-2 --hyperparameters gamma_hyper=1e-15
-pi_hyper=0.01 pi_hyper2=0.01 rho_hyper=1.0 rho_hyper2=1.0
+pi_hyper=1e-2 pi_hyper2=1e-2 rho_hyper=1.0 rho_hyper2=1.0
 --anneal-hyperparameters gamma_hyper=0.999 --anneal-steps 120000`.
 However, for seven species (species IDs: sp-100076, sp-101302,
 sp-101306, sp-101704, sp-102478, sp-103456, sp-103683), amended
 hyperparameters were found to perform better: `gamma_hyper=1e-10
-pi_hyper=1e-3 pi_hyper2=1e-3 gamma_hyper=0.1 rho_hyper=10.0
+pi_hyper=1e-3 pi_hyper2=1e-3 gamma_hyper=1e-1 rho_hyper=10.0
 rho_hyper2=10.0 --anneal-steps 20000`.
 
 Each strain-pure set was defined as those samples where StrainFacts
@@ -1045,7 +1053,7 @@ For analysis of the HMP2 and UCFMT datasets—but not performance
 benchmarking—strains were filtered to remove those likely to be low
 accuracy. Strains with fewer than 100 unmasked positions in their
 consensus genotype were included in benchmarking but excluded from all
-other analyses. This criterion *a priori* excludes 19 of the 627 species
+other analyses. This criterion _a priori_ excludes 19 of the 627 species
 profiled in this work. For analyses of gene content, strains with an
 estimated depth of < 1x across all strain-pure samples were also
 excluded. Finally, strains with < 90% of species genes or with a
@@ -1093,12 +1101,13 @@ before again collecting the maximum counts across clusters. Significance
 was tested by comparing the number of clusters with ≥3 related
 annotations to the null.
 
-For analysis of the UCFMT *E. coli* strains, shell genes and
+For analysis of the UCFMT _E. coli_ strains, shell genes and
 co-occurrence clusters were defined using the HMP2 inferred strains, not
-*de novo*.
+_de novo_.
 
 ## Availability of software, code, metadata, and compute environments
 
+StrainPGC is freely available at <https://github.com/bsmith89/StrainPGC>.
 Code and metadata needed to replicate our analyses and plots are
 available at
 <https://github.com/bsmith89/StrainPGC-manuscript>.
@@ -1107,7 +1116,7 @@ available at
 
 ## Data Access
 
-Reference genomes and metagenomic data analyzed for this study are
+All reference genomes and metagenomic data analyzed for this study are
 available in public repositories as described in the methods.
 
 ## Competing Interests Statement
@@ -1146,10 +1155,6 @@ thank Françoise Chanut for extensive editorial support.
 
 # Supplementary Materials
 
-Supplementary results and code to reproduce our analyses and figures are
-integrated into analysis notebooks available at
-<https://github.com/bsmith89/StrainPGC-manuscript>.
-
 ![**Figure S1: Relationship between sequencing depth and the accuracy of
 gene content estimation.** Points represent the performance of each tool
 (colors) on each of the 105 benchmark strains. The horizontal position
@@ -1165,14 +1170,17 @@ using reference genomes for comparison to StrainPGC-based gene content
 estimates.
 ](fig/genome_fraction_refs_figure.dpi200.png)
 
--   Supplementary Table 1: Details about all inferred strains in HMP2
+**Supplementary Table S1: Details about all inferred strains in HMP2.**
+Includes columns representing: the number of genes in estimate gene content, number of samples included as
+strain-pure, total species depth across strain pure samples, the fraction of
+species marker genes in the estimated gene content, the log of the standard deviation
+of gene depth ratio, and the number of unmasked, genotyped positions used for
+inter-strain comparisons.
 
-    -   `hmp2_inferred_strains_supplementary_table1.tsv`
-
--   Supplementary Table 2: Details about gene content of E. coli
-    > strain-6 vs. strain-9 in UCFMT
-
-    -   `ucfmt_focal_strain_genes_supplementary_table2.tsv`
+**Supplementary Table S2: Details about gene content of _E. coli_ strain-6 vs. strain-9 in UCFMT.**
+Includes a row for each gene family found in either high-engraftment strain. Columns include
+gene annotations, mean length across members of the gene family, co-occurence cluster assignment
+and the fraction of other co-occurence cluster members also found in each strain.
 
 ## References
 
