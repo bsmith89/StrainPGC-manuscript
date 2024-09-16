@@ -354,6 +354,8 @@ samples and applies non-negative matrix factorization to jointly
 estimate gene content and strain depth (Fig. 2C). For all three methods,
 we used the same reference database and pangenome profiles as input,
 thereby comparing the core gene content estimation approaches on an
+<!-- FIXME: "core gene content" has a very different meaning elsewhere in this
+paper. I don't mean it that way here. -->
 equal basis. However, since strains inferred using PanPhlAn and
 StrainPanDA do not have SNP genotypes to be used for matching, for each
 benchmark genome, we instead selected the inferred strain with the
